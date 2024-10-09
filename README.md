@@ -42,7 +42,7 @@
 ### Setup
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Abhishek-2502/Stockify.git
+   git clone https://github.com/Arnavjain2503/Stockify.git
    ```
 2. **Open the project in Android Studio**.
 3. **Add your API key**:
