@@ -13,7 +13,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Wait for the animation, then move to MainActivity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

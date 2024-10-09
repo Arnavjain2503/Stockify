@@ -30,16 +30,15 @@ public class MainActivity extends AppCompatActivity {
     CardView additionalcardview;
     LinearLayout colorLinearLayout;
 
-    private StockViewModel stockViewModel;
-    private final Handler handler = new Handler(Looper.getMainLooper());
-    private Handler priceUpdateHandler = new Handler();
-    private boolean isToastVisible = false;
-    private Runnable priceUpdateRunnable;
-
-    private Double previousPrice = null;
-
-    // Additional information TextViews
     TextView additionalExchangeTextView , highPriceTextView, openPriceTextView, lowPriceTextView, previousCloseTextView, urlTextView;
+
+    private StockViewModel stockViewModel;
+    private Runnable priceUpdateRunnable;
+    private Handler priceUpdateHandler = new Handler();
+    private final Handler handler = new Handler(Looper.getMainLooper());
+
+    private boolean isToastVisible = false;
+    private Double previousPrice = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
         colorLinearLayout = findViewById(R.id.colorLinearLayout);
         priceImageView = findViewById(R.id.priceImageView);
 
-        // Initialize additional information TextViews
-        TextView additionalExchangeTextView = findViewById(R.id.additionalExchangeTextView);
+        additionalExchangeTextView = findViewById(R.id.additionalExchangeTextView);
 
         highPriceTextView = findViewById(R.id.highprice);
         openPriceTextView = findViewById(R.id.openprice);
@@ -99,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Observe additional information
         stockViewModel.getHighPrice().observe(this, highPrice -> {
             if (highPrice != null) {
                 highPriceTextView.setText(String.format("%.2f", highPrice));
@@ -130,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Observe error message for non-intrusive hints
         stockViewModel.getErrorMessage().observe(this, errorMessage -> {
             if (errorMessage != null && !errorMessage.isEmpty() && !isToastVisible) {
                 isToastVisible = true;
@@ -140,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
         stockViewModel.getExchange().observe(this, exchange -> {
             if (exchange != null) {
-                additionalExchangeTextView.setText("Exchange: "+ exchange); // Set the exchange value in the additional card view
+                additionalExchangeTextView.setText("Exchange: "+ exchange);
             }
         });
 
@@ -160,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
         stockViewModel.getStockSymbol().observe(this, stockSymbol -> {
             if (stockSymbol != null) {
-                stockPriceLabel.setText(stockSymbol); // Update stock price label
+                stockPriceLabel.setText(stockSymbol);
             }
         });
 
@@ -180,8 +176,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        // In onCreate method, after initializing urlTextView
         urlTextView.setOnClickListener(view -> {
             String url = urlTextView.getText().toString();
             if (!url.isEmpty()) {
@@ -257,6 +251,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        priceUpdateHandler.removeCallbacks(priceUpdateRunnable); // Clean up the handler
+        priceUpdateHandler.removeCallbacks(priceUpdateRunnable);
     }
 }
