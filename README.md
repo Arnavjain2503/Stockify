@@ -83,7 +83,7 @@
 - **Retrofit** is utilized for making efficient network requests with appropriate error handling.
 
 ### Permissions
-The app requires the following permission:
+The app requires the following permission in `AndroidManifest.xml` file:
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
