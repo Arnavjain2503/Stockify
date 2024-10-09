@@ -26,7 +26,6 @@
 - **Loading Indicator**: Shows a loading overlay while fetching data, ensuring a smooth user experience.
 - **Maintains Previous Data**: If a wrong stock symbol is entered, the app maintains the previously fetched stock data card.
 - **Clickable URL**: Users can click on the company URL to open the official website in a browser.
-- **US Market Hours**: The app primarily works with US stock markets, so stock data is fetched during US market hours (9:30 AM to 4:00 PM EST, 7:00 PM to 1:30 AM IST for Indian investors).
 - **Bottom Navigation**: Navigation between different sections is planned for future implementation.
 
 ## Screenshots
@@ -110,7 +109,9 @@ The app uses the Finnhub API for real-time stock data:
 - **/profile2**: Retrieves detailed company profile information, including company name, logo, and exchange information.
 
 ### Important Note
-If the network connection is slow, data fetching from the API will take longer, especially when using an Android Virtual Device (AVD). It's recommended to use AVD with a fast network connection. Alternatively, you can run the app on a physical device by connecting via cable or using the APK for smoother performance.
+- The app primarily works with US stock markets. You can check stock prices at any time, but the every-minute update feature will only work during US market hours (9:30 AM to 4:00 PM EST, 7:00 PM to 1:30 AM IST for Indian investors).
+
+- If the network connection is slow, data fetching from the API will take longer, especially when using an Android Virtual Device (AVD). It's recommended to use AVD with a fast network connection. Alternatively, you can run the app on a physical device by connecting via cable or using the APK for smoother performance.
 
 ## License
 This project is licensed under the MIT License.
