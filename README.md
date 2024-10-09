@@ -24,6 +24,9 @@
 - **Additional Information**: Display company logos and links to official websites.
 - **Error Handling**: Gracefully handles invalid stock symbols and network issues with informative error messages.
 - **Loading Indicator**: Shows a loading overlay while fetching data, ensuring a smooth user experience.
+- **Maintains Previous Data**: If a wrong stock symbol is entered, the app maintains the previously fetched stock data card.
+- **Clickable URL**: Users can click on the company URL to open the official website in a browser.
+- **US Market Hours**: The app primarily works with US stock markets, so stock data is fetched during US market hours (9:30 AM to 4:00 PM EST, 7:00 PM to 1:30 AM IST for Indian investors).
 - **Bottom Navigation**: Navigation between different sections is planned for future implementation.
 
 ## Screenshots
@@ -101,8 +104,12 @@ implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 - **ViewModel** for maintaining a clean separation of UI and business logic.
 - **Glide** for loading images (e.g., company logos).
 
-### Important Note
+### Finnhub API Endpoints
+The app uses the Finnhub API for real-time stock data:
+   /quote: Fetches current stock prices.
+   /profile2: Retrieves detailed company profileinformation.
 
+### Important Note
 If the network connection is slow, data fetching from the API will take longer, especially when using an Android Virtual Device (AVD). It's recommended to use AVD with a fast network connection. Alternatively, you can run the app on a physical device by connecting via cable or using the APK for smoother performance.
 
 ## License
