@@ -23,8 +23,7 @@
 - **Additional Information**: Display company logos and links to official websites.
 - **Error Handling**: Gracefully handles invalid stock symbols and network issues with informative error messages.
 - **Loading Indicator**: Shows a loading overlay while fetching data, ensuring a smooth user experience.
-- **Bottom Navigation**: Easily navigate between different sections of the app (Stocks, SIP, IPO).
-- **Future Navigation**: Navigation between different sections is planned for future implementation.
+- **Bottom Navigation**: Navigation between different sections is planned for future implementation.
 
 ## Screenshots
 <p align="center">
