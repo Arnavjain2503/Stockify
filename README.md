@@ -2,7 +2,6 @@
 
 **Stockify** is an intuitive Android application that provides users with real-time stock market data. With a user-friendly interface and dynamic features, users can easily search for stock symbols and view comprehensive information, including current prices, percentage changes, and additional company details.
 
-
 ## Table of Contents
 
 1. [Features](#features)
@@ -21,17 +20,17 @@
 - **Dynamic UI Updates**: The app changes the background color based on price fluctuations (green for price increases and red for decreases) and displays corresponding up/down images.
 - **Price Difference**: The app shows the difference between the previous and current prices, providing users with insight into stock performance at a glance.
 - **Periodic Updates**: The app fetches updated stock information every minute to ensure users receive the latest data.
+- **MVVM Architecture**: The app is built using the MVVM (Model-View-ViewModel) architecture for better separation of concerns and maintainability.
 - **Additional Information**: Display company logos and links to official websites.
 - **Error Handling**: Gracefully handles invalid stock symbols and network issues with informative error messages.
 - **Loading Indicator**: Shows a loading overlay while fetching data, ensuring a smooth user experience.
-- **Bottom Navigation**: Easily navigate between different sections of the app (Stocks, SIP, IPO).
-- **Future Navigation**: Navigation between different sections is planned for future implementation.
+- **Bottom Navigation**: Navigation between different sections is planned for future implementation.
 
 ## Screenshots
 <p align="center">
-    <img src="App_Images/splash.jpg" height="600" width="300" alt="Error" border=5>
-    <img src="App_Images/main_empty.jpg" height="600" width="300" alt="Error" border=5>
-    <img src="App_Images/main.jpg" height="600" width="300" alt="Error" border=5>
+    <img src="App_Images/splash.jpg" height="500" width="250" alt="Error" border=2>
+    <img src="App_Images/main_empty.jpg" height="500" width="250" alt="Error" border=2>
+    <img src="App_Images/main.jpg" height="500" width="250" alt="Error" border=2>
 </p>
 
 ## Installation Instructions
@@ -43,7 +42,7 @@
 ### Setup
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Abhishek-2502/Stockify.git
+   git clone https://github.com/Arnavjain2503/Stockify.git
    ```
 2. **Open the project in Android Studio**.
 3. **Add your API key**:
@@ -61,7 +60,6 @@
 - **View stock details**: The app displays current prices, percentage changes, high/low prices, company logos, and links to the company’s website.
 - **Dynamic Feedback**: The background color changes to green when the stock price increases and to red when it decreases. An up/down image is shown based on the price trend, along with the difference between the previous and current prices for quick visual feedback.
 - **Periodic Updates**: The app fetches new stock information every minute to keep users updated with the latest market data.
-- **Navigate easily**: Use the bottom navigation menu to switch between different sections (Stocks, SIP, IPO).
 
 ## Code Overview
 
@@ -85,7 +83,7 @@
 - **Retrofit** is utilized for making efficient network requests with appropriate error handling.
 
 ### Permissions
-The app requires the following permission:
+The app requires the following permission in `AndroidManifest.xml` file:
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
@@ -102,6 +100,10 @@ implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 - **Retrofit** for API requests.
 - **ViewModel** for maintaining a clean separation of UI and business logic.
 - **Glide** for loading images (e.g., company logos).
+
+### Important Note
+
+If the network connection is slow, data fetching from the API will take longer, especially when using an Android Virtual Device (AVD). It's recommended to use AVD with a fast network connection. Alternatively, you can run the app on a physical device by connecting via cable or using the APK for smoother performance.
 
 ## License
 This project is licensed under the MIT License.
