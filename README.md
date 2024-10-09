@@ -60,7 +60,6 @@
 - **View stock details**: The app displays current prices, percentage changes, high/low prices, company logos, and links to the company’s website.
 - **Dynamic Feedback**: The background color changes to green when the stock price increases and to red when it decreases. An up/down image is shown based on the price trend, along with the difference between the previous and current prices for quick visual feedback.
 - **Periodic Updates**: The app fetches new stock information every minute to keep users updated with the latest market data.
-- **Navigate easily**: Use the bottom navigation menu to switch between different sections (Stocks, SIP, IPO).
 
 ## Code Overview
 
