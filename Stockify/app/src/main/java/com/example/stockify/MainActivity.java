@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 colorLinearLayout.setBackgroundColor(Color.WHITE); // Reset color to white on new search
                 previousPrice = null;
                 loadingText.setText("");
+                isToastVisible = false;
                 stockViewModel.fetchStockPrice(symbolString); // Fetch stock price on search click
                 startPeriodicPriceUpdate(symbolString); // Start periodic updates
                 priceImageView.setImageResource(R.drawable.white);
@@ -180,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-// In onCreate method, after initializing urlTextView
+        // In onCreate method, after initializing urlTextView
         urlTextView.setOnClickListener(view -> {
             String url = urlTextView.getText().toString();
             if (!url.isEmpty()) {
