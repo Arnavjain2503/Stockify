@@ -106,8 +106,8 @@ implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 ### Finnhub API Endpoints
 The app uses the Finnhub API for real-time stock data:
-- **/quote**: Fetches current stock prices.
-- **/profile2**: Retrieves detailed company profileinformation.
+- **/quote**: Fetches current stock prices, percentage changes, opening price, high/low prices, and previous close.
+- **/profile2**: Retrieves detailed company profile information, including company name, logo, and exchange information.
 
 ### Important Note
 If the network connection is slow, data fetching from the API will take longer, especially when using an Android Virtual Device (AVD). It's recommended to use AVD with a fast network connection. Alternatively, you can run the app on a physical device by connecting via cable or using the APK for smoother performance.
