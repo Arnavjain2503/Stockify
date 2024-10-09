@@ -31,8 +31,12 @@
 ## Screenshots
 <p align="center">
     <img src="App_Images/splash.jpg" height="500" width="250" alt="Error" border=2>
-    <img src="App_Images/main_empty.jpg" height="500" width="250" alt="Error" border=2>
+    <img src="App_Images/main_Initial_and_Loading_Screen.jpg" height="500" width="250" alt="Error" border=2>
     <img src="App_Images/main.jpg" height="500" width="250" alt="Error" border=2>
+    <img src="App_Images/main_additional.jpg" height="500" width="250" alt="Error" border=2>
+    <img src="App_Images/Green.jpg" height="500" width="250" alt="Error" border=2>
+    <img src="App_Images/Red.jpg" height="500" width="250" alt="Error" border=2>
+
 </p>
 
 ## Installation Instructions
