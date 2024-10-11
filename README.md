@@ -14,17 +14,17 @@
 
 ## Features
 
-- **Stock Search**: Effortlessly search for stocks by entering their symbol (e.g., AAPL, TSLA).
-- **Real-time Stock Data**: View current stock price, percentage change, high/low prices, open/close prices, and the exchange.
-- **Splash Screen Animation**: A visually appealing graph animation is displayed on the splash screen during app launch.
+- **Stock Search**: Effortlessly search for stocks by entering their symbol (e.g., AAPL, TSLA) and Clicking on search icon.
+- **Real-time Stock Data**: View current stock price, percentage change, Company name, high/low prices, open/close prices, and the exchange.
+- **MVVM Architecture**: The app is built using the MVVM (Model-View-ViewModel) architecture for better separation of concerns and maintainability.
+- **Loading Indicator**: Shows a loading overlay while fetching data, ensuring a smooth user experience.
+- **Error Handling**: Gracefully handles invalid stock symbols and network issues with informative error messages.
 - **Dynamic UI Updates**: The app changes the background color based on price fluctuations (green for price increases and red for decreases) and displays corresponding up/down images.
 - **Price Difference**: The app shows the difference between the previous and current prices, providing users with insight into stock performance at a glance.
 - **Periodic Updates**: The app fetches updated stock information every minute to ensure users receive the latest data.
-- **MVVM Architecture**: The app is built using the MVVM (Model-View-ViewModel) architecture for better separation of concerns and maintainability.
 - **Additional Information**: Display company logos and links to official websites.
-- **Error Handling**: Gracefully handles invalid stock symbols and network issues with informative error messages.
-- **Loading Indicator**: Shows a loading overlay while fetching data, ensuring a smooth user experience.
 - **Clickable URL**: Users can click on the company URL to open the official website in a browser.
+- **Splash Screen Animation**: A visually appealing graph animation is displayed on the splash screen during app launch.
 - **Bottom Navigation**: Navigation between different sections is planned for future implementation.
 
 ## Screenshots
