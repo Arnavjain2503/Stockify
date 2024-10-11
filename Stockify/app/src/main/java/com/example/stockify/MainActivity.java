@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private StockViewModel stockViewModel;
     private Runnable priceUpdateRunnable;
+
     private Handler priceUpdateHandler = new Handler();
     private final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -69,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         previousCloseTextView = findViewById(R.id.previousclose);
         urlTextView = findViewById(R.id.URL);
 
-        loadingText.setText("");
         animatedCardView.setVisibility(View.GONE); // Hide the CardView initially
         additionalcardview.setVisibility(View.GONE); // Hide the CardView initially
 
@@ -127,6 +127,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        stockViewModel.isDataValid().observe(this, isValid -> {
+            if (isValid) {
+                additionalcardview.setVisibility(View.GONE);
+                animatedCardView.setVisibility(View.VISIBLE);
+            } else {
+                additionalcardview.setVisibility(View.GONE);
+                animatedCardView.setVisibility(View.GONE);
+            }
+        });
+
         stockViewModel.getErrorMessage().observe(this, errorMessage -> {
             if (errorMessage != null && !errorMessage.isEmpty() && !isToastVisible) {
                 isToastVisible = true;
@@ -164,18 +174,19 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(view -> {
             String symbolString = symbol.getText().toString();
             if (!symbolString.isEmpty()) {
-                colorLinearLayout.setBackgroundColor(Color.WHITE); // Reset color to white on new search
+                colorLinearLayout.setBackgroundColor(Color.WHITE);
                 previousPrice = null;
                 loadingText.setText("");
                 isToastVisible = false;
-                stockViewModel.fetchStockPrice(symbolString); // Fetch stock price on search click
-                startPeriodicPriceUpdate(symbolString); // Start periodic updates
+                stockViewModel.fetchStockPrice(symbolString);
+                startPeriodicPriceUpdate(symbolString);
                 priceImageView.setImageResource(R.drawable.white);
             } else {
                 Toast.makeText(MainActivity.this, "Please enter a valid symbol", Toast.LENGTH_SHORT).show();
             }
         });
 
+        //Company URL Click
         urlTextView.setOnClickListener(view -> {
             String url = urlTextView.getText().toString();
             if (!url.isEmpty()) {
@@ -188,50 +199,55 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Displays a loading indicator (overlay) while fetching stock data,
+    //and hides the stock data card to prevent user interaction during the fetch.
     private void showLoadingOverlay() {
-        loadingOverlay.setVisibility(View.VISIBLE); // Show loading overlay
-        animatedCardView.setVisibility(View.GONE); // Hide the CardView when loading starts
-        additionalcardview.setVisibility(View.GONE); // Hide the CardView when loading starts
-        search.setEnabled(false); // Disable the search button while loading
+        loadingOverlay.setVisibility(View.VISIBLE);
+        animatedCardView.setVisibility(View.GONE);
+        additionalcardview.setVisibility(View.GONE);
+        search.setEnabled(false);
     }
 
+    //Hides the loading indicator and re-displays the stock data card if valid stock data is fetched.
     private void hideLoadingOverlay() {
-        loadingOverlay.setVisibility(View.GONE); // Hide loading overlay
-        // Only show the CardView if stock data is fetched successfully
+        loadingOverlay.setVisibility(View.GONE);
+
         if (stockViewModel.getStockPrice().getValue() != null) {
-            animatedCardView.setVisibility(View.VISIBLE); // Show the CardView after loading finishes
-            additionalcardview.setVisibility(View.VISIBLE); // Show the CardView after loading finishes
+            animatedCardView.setVisibility(View.VISIBLE);
+            additionalcardview.setVisibility(View.VISIBLE);
         }
-        search.setEnabled(true); // Enable the search button after loading completes
+
+        search.setEnabled(true);
     }
 
+    //Updates the displayed stock price, manages UI updates for price changes,
+    //and color codes (green for increase, red for decrease) with an icon to show the stock trend.
     private void updateStockPrice(double currentPrice) {
         handler.post(() -> {
             String formattedPrice = String.format("%.2f", currentPrice);
             stockPriceTextView.setText(formattedPrice);
 
-            // Update the color based on price change and the up/down image
             if (previousPrice != null) {
-                animatedCardView.setVisibility(View.VISIBLE); // Ensure the CardView is visible when price is updated
+                animatedCardView.setVisibility(View.VISIBLE);
                 double priceDifference = Math.abs(currentPrice - previousPrice);
                 String priceDiffFormatted = String.format("%.2f", priceDifference);
 
-                // Update the loadingText with the price difference
                 loadingText.setText("(" + priceDiffFormatted + ")");
 
                 if (currentPrice > previousPrice) {
                     colorLinearLayout.setBackgroundColor(Color.GREEN);
-                    priceImageView.setImageResource(R.drawable.up_image); // Set "up" image
+                    priceImageView.setImageResource(R.drawable.up_image);
                 } else if (currentPrice < previousPrice) {
                     colorLinearLayout.setBackgroundColor(Color.RED);
-                    priceImageView.setImageResource(R.drawable.down_image); // Set "down" image
+                    priceImageView.setImageResource(R.drawable.down_image);
                 }
 
             }
             previousPrice = currentPrice;
         });
     }
-
+    //Schedules periodic stock price updates every 60 seconds,
+    //re-fetching the stock data for the provided symbol.
     private void startPeriodicPriceUpdate(String symbol) {
         if (priceUpdateRunnable != null) {
             priceUpdateHandler.removeCallbacks(priceUpdateRunnable);
@@ -240,8 +256,8 @@ public class MainActivity extends AppCompatActivity {
         priceUpdateRunnable = new Runnable() {
             @Override
             public void run() {
-                stockViewModel.fetchStockPrice(symbol); // Fetch updated stock price periodically
-                priceUpdateHandler.postDelayed(this, 60000); // Update every minute
+                stockViewModel.fetchStockPrice(symbol);
+                priceUpdateHandler.postDelayed(this, 60000);
             }
         };
 

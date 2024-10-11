@@ -24,7 +24,6 @@
 - **Additional Information**: Display company logos and links to official websites.
 - **Error Handling**: Gracefully handles invalid stock symbols and network issues with informative error messages.
 - **Loading Indicator**: Shows a loading overlay while fetching data, ensuring a smooth user experience.
-- **Maintains Previous Data**: If a wrong stock symbol is entered, the app maintains the previously fetched stock data card.
 - **Clickable URL**: Users can click on the company URL to open the official website in a browser.
 - **Bottom Navigation**: Navigation between different sections is planned for future implementation.
 

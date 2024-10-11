@@ -10,7 +10,6 @@
     android:padding="15dp"
     tools:context=".MainActivity">
 
-    <!-- Top CardView (Logo and Search bar) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,7 +36,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Search CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
@@ -75,13 +73,11 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- FrameLayout to hold ScrollView and loading overlay -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- ScrollView containing the CardView -->
         <FrameLayout
             android:id="@+id/loadingOverlay"
             android:layout_width="wrap_content"

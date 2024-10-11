@@ -9,7 +9,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 public class StockViewModel extends ViewModel {
     private final MutableLiveData<Double> stockPrice = new MutableLiveData<>();
     private final MutableLiveData<String> companyName = new MutableLiveData<>();
@@ -24,6 +23,7 @@ public class StockViewModel extends ViewModel {
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
     private final MutableLiveData<String> stockSymbol = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isDataValid = new MutableLiveData<>(false);
     private final StockApiService stockApiService;
 
     private static final String API_KEY = "cruh171r01qvnd3ndoa0cruh171r01qvnd3ndoag";
@@ -90,8 +90,15 @@ public class StockViewModel extends ViewModel {
         return stockSymbol;
     }
 
+    public LiveData<Boolean> isDataValid() {
+        return isDataValid;
+    }
+
+    //Fetches stock data for the given symbol, displays the card with stock details if valid,
+    // or hides the card and shows an error if invalid or failed.
     public void fetchStockPrice(String symbol) {
-        isLoading.setValue(true); // Set loading state to true
+        isLoading.setValue(true);
+        isDataValid.setValue(false);
 
         stockApiService.getStockQuote(symbol, API_KEY).enqueue(new Callback<StockQuoteResponse>() {
             @Override
@@ -108,31 +115,33 @@ public class StockViewModel extends ViewModel {
                         openPrice.setValue(quote.getOpenPrice());
                         previousClosePrice.setValue(quote.getPreviousClosePrice());
                         stockSymbol.setValue(symbol);
-                        fetchCompanyProfile(symbol); // Fetch company profile if stock data is valid
+                        isDataValid.setValue(true);
+                        fetchCompanyProfile(symbol);
                     } else {
-                        // Trigger error message for invalid stock symbol
                         errorMessage.setValue("The symbol you entered is invalid. Please try again.");
-                        isLoading.setValue(false); // Stop loading if error
+                        isLoading.setValue(false);
+                        isDataValid.setValue(false);
                     }
                 } else {
-                    // Trigger error for invalid symbol or empty response
                     errorMessage.setValue("The symbol you entered is invalid. Please try again.");
                     isLoading.setValue(false);
+                    isDataValid.setValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<StockQuoteResponse> call, Throwable t) {
-                // Trigger network error message once
                 errorMessage.setValue("Please check your internet connection and try again.");
                 isLoading.setValue(false);
+                isDataValid.setValue(false);
                 t.printStackTrace();
             }
         });
     }
 
+    //Fetches and updates the company profile (name, logo, web URL, exchange) for a valid stock symbol,
+    // completing the loading process.
     private void fetchCompanyProfile(String symbol) {
-        // Fetch company profile only if stock data is valid
         stockApiService.getCompanyProfile(symbol, API_KEY).enqueue(new Callback<CompanyProfileResponse>() {
             @Override
             public void onResponse(Call<CompanyProfileResponse> call, Response<CompanyProfileResponse> response) {
@@ -143,7 +152,7 @@ public class StockViewModel extends ViewModel {
                     webUrl.setValue(profile.getWebUrl());
                     exchange.setValue(profile.getExchange());
                 }
-                isLoading.setValue(false); // Stop loading after company profile is fetched
+                isLoading.setValue(false);
             }
 
             @Override

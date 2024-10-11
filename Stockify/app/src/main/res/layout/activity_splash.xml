@@ -6,7 +6,6 @@
     android:background="@color/white"
     tools:context=".SplashActivity">
 
-    <!-- Logo -->
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="150dp"
@@ -17,7 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Custom Graph View -->
     <com.example.stockify.GraphView
         android:id="@+id/graphView"
         android:layout_width="match_parent"
